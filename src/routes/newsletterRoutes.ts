@@ -1,4 +1,4 @@
-import express from 'express';
+import { Router } from 'express';
 import {
   createNewsletter,
   getAllNewsletters,
@@ -7,7 +7,7 @@ import {
   deleteNewsletter,
 } from '../controllers/newsletterController';
 
-const router = express.Router();
+const router = Router();
 
 router.post('/', createNewsletter);
 router.get('/', getAllNewsletters);

@@ -1,0 +1,51 @@
+2024-11-02T20:40:50.811Z error: Creation failed: 
+Invalid `prisma.newsletter.create()` invocation in
+C:\Users\USER\OneDrive\Desktop\newsletter-api\src\controllers\newsletterController.ts:13:51
+
+  10 const validatedData: NewsletterInput = NewsletterSchema.parse(req.body);
+  11 
+  12 // Use Prisma to create the newsletter
+→ 13 const newNewsletter = await prisma.newsletter.create(
+The column `Newsletter.author` does not exist in the current database.
+2024-11-02T20:47:38.407Z info: Newsletter created with ID: 5
+2024-11-03T19:08:24.921Z info: Yay it worked
+2024-11-03T19:09:20.589Z info: Yay it worked
+2024-11-03T19:09:42.419Z info: Yay it worked
+2024-11-03T19:36:23.577Z info: Newsletter created with ID: 6
+2024-11-03T19:37:27.474Z error: Error from logger: 
+Invalid `prisma.newsletter.findMany()` invocation in
+C:\Users\USER\OneDrive\Desktop\newsletter-api\src\controllers\newsletterController.ts:75:49
+
+  72 }
+  73 
+  74 // Fetch newsletters with pagination, sorting and filtering
+→ 75 const newsletters = await prisma.newsletter.findMany({
+       where: {
+         createdAt: {
+         ~~~~~~~~~
+           gte: new Date("2024-10-31T00:00:00.000Z"),
+           lte: new Date("2024-11-02T00:00:00.000Z")
+         },
+     ?   AND?: NewsletterWhereInput | NewsletterWhereInput[],
+     ?   OR?: NewsletterWhereInput[],
+     ?   NOT?: NewsletterWhereInput | NewsletterWhereInput[],
+     ?   id?: IntFilter | Int,
+     ?   title?: StringFilter | String,
+     ?   content?: StringFilter | String,
+     ?   author?: StringNullableFilter | String | Null,
+     ?   publishedAt?: DateTimeFilter | DateTime
+       },
+       skip: 0,
+       take: 10,
+       orderBy: {
+         publishedAt: "desc"
+       }
+     })
+
+Unknown argument `createdAt`. Available options are marked with ?.
+2024-11-03T20:26:48.796Z info: Newsletter with ID 5 successfully updated.
+2024-11-03T20:27:11.483Z error: Newsletter with ID 7 not found.
+2024-11-03T20:29:44.446Z info: Newsletter with ID 5 successfully updated.
+2024-11-03T20:29:54.659Z error: Validation error:
+2024-11-03T20:30:21.150Z info: Newsletter with ID 5 successfully updated.
+2024-11-07T00:39:31.851Z info: Newsletter with ID 5 successfully flagged as inactive.
