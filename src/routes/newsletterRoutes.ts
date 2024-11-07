@@ -6,6 +6,7 @@ import {
   updateNewsletter,
   deleteNewsletter,
 } from '../controllers/newsletterController';
+import { validateRequest } from "../middleware/validateRequest";
 
 const router = Router();
 
