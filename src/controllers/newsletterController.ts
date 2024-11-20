@@ -1,55 +1,61 @@
-import { Request, Response } from 'express';
-import { z } from "zod";
+import { Request, Response, NextFunction } from 'express';
+import { z, ZodError } from "zod";
 import { Prisma, PrismaClient } from "@prisma/client";
 import prisma from '../config/prismaClient'; 
 import { NewsletterSchema, NewsletterInput } from "../schemas/newsletterSchema";
+import { AppError } from "../utils/AppError";
 import logger from "../utils/logger";
 
-export const createNewsletter = async (req: Request, res: Response):Promise<any>  => {
+export const createNewsletter = async (req: Request, res: Response, next: NextFunction):Promise<any>  => {
   try {
     // Validate the request body against the Zod schema
     const validatedData: NewsletterInput = NewsletterSchema.parse(req.body);
 
-    // Use Prisma to create the newsletter
+    const { title, content } = validatedData;
+
+    const existingNewsletter = await prisma.newsletter.findUnique({
+      where: { title }
+    });
+
+    if (existingNewsletter) {
+      throw new AppError('A newsletter with this title already exists.', 409);
+    }
+    
     const newNewsletter = await prisma.newsletter.create({
       data: {
-        title: validatedData.title,
-        content: validatedData.content,
-        author: validatedData.author, // Optional field
+        ...validatedData,
+        isActive: validatedData.isActive ?? true
       },
     });
     
     // Log successful creation
     logger.info(`Newsletter created with ID: ${newNewsletter.id}`)
 
-    return res.status(201).json(newNewsletter);
+    return res.status(201).json({
+      success: true,
+      data: newNewsletter
+    });
     
-  } catch (error) {
+  } catch (err: any) {
     
-    if (error instanceof z.ZodError) {
-      
-      // Handle validation errors
-      logger.error(`Validation error: ${JSON.stringify(error.errors)}`);
-     
-      return res.status(400).json({ errors: error.errors });
-      
+    if (err.name === "ZodError") {
+      const errorMessage = err.errors.map((e: any) => e.message).join(", ");
+      return next(new AppError(`Validation error: ${errorMessage}`, 400));
     }
     
-    // Handle unexpected errors
-    logger.error(`Creation failed: ${(error as Error).message}`);
-    return res.status(500).json({ error: "An error occurred while creating the newsletter" });
+    next(err) // Pass other eerror to the the global error handler
     
   }
-
 };
 
-export const getAllNewsletters = async (req: Request, res: Response): Promise<any> => {
+export const getAllNewsletters = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
 
   try {
     // Extract query parameters with defaults
     const limit = parseInt(req.query.limit as string) || 10; // Default limit to 10
     const offset = parseInt(req.query.offset as string) || 0; // Default offset to 0
     const sort = req.query.sort === "asc" ? "asc" : "desc"; // Default to descending order
+    const search = req.query.search as string | undefined;
 
     // Extract filtering parameters
     const author = req.query.author as string | undefined;
@@ -65,7 +71,7 @@ export const getAllNewsletters = async (req: Request, res: Response): Promise<an
 
     if (title) {
       filters.title = title
-    }
+    };
 
     if (startDate || endDate) {
       filters.publishedAt = {};
@@ -75,15 +81,23 @@ export const getAllNewsletters = async (req: Request, res: Response): Promise<an
       if (endDate) {
         filters.publishedAt.lte = new Date(endDate); // Less than or equal to endDate
       }
-    }
+    };
 
-    // Fetch newsletters with pagination, sorting and filtering
+    if (search) {
+      filters.OR = [
+        { title: { contains: search, mode: "insensitive" } },
+        { content: { contains: search, mode: "insensitive" } },
+      ];
+    };
+
+    // Fetch newsletters with pagination, sorting, filtering and search
     const newsletters = await prisma.newsletter.findMany({
       where: {
         isActive: true, 
-        ...(filters?.title && { title: filters.title }),
-        ...(filters?.author && { author: filters.author }),
-        ...(filters?.publishedAt && { publishedAt: filters.publishedAt }),
+        ...filters,
+        // ...(filters?.title && { title: filters.title }),
+        // ...(filters?.author && { author: filters.author }),
+        // ...(filters?.publishedAt && { publishedAt: filters.publishedAt }),
       },
       skip: offset,
       take: limit,
@@ -93,104 +107,146 @@ export const getAllNewsletters = async (req: Request, res: Response): Promise<an
     });
 
     // Fetch the total count of newsletters for pagination metadata
-    const totalNewsletters = await prisma.newsletter.count({where: filters});
-
+    //const totalNewsletters = await prisma.newsletter.count({where: filters});
+    const totalNewsletters = await prisma.newsletter.count({
+      where: {
+        isActive: true,
+        ...filters
+      }
+    });
     console.log(filters);
-    
 
+    if (!newsletters.length) {
+      throw new AppError("No newsletters found with the specified criteria", 404);
+    }
+    
     // Respond with newsletters and pagination metadata
     return res.json({
-      data: newsletters,
       meta: {
         total: totalNewsletters,
         limit,
         offset,
         currentPage: Math.ceil(offset / limit) + 1,
         totalPages: Math.ceil(totalNewsletters / limit),
-      }
+      },
+      data: newsletters
     });
     
   } catch (error) {
-    logger.error(`Error from logger: ${(error as Error).message}`);
-    console.error("Error fetching newsletters:", error);
-    return res.status(500).json({ error: "An error occurred while retrieving newsletters" });
+    logger.error(`Error fetching newsletters: ${(error as Error).message}`);
+    next(error instanceof AppError ? error : new AppError("An unexpected error occurred", 500));
   }
 };
 
-export const getNewsletterById = async (req: Request, res: Response):Promise<void> => {
-  const { id } = req.params;
-
+export const getNewsletterById = async (req: Request, res: Response, next: NextFunction):Promise<void> => {
   try {
+    const  id  = req.params.id;
+    const newsletterId = Number(id);
+
+    // Fetch newsletter
     const newsletter = await prisma.newsletter.findUnique({
-      where: { id: Number(id) },
+      where: { id: newsletterId },
     });
+
     if (!newsletter) {
-      res.status(404).json({ error: 'Newsletter not found' });
-      return;
+      throw new AppError(`Newsletter with ID ${newsletterId} not found.`, 404);
     }
-    res.json(newsletter);
+
+    res.status(200).json({
+      success: true,
+      message: "Newsletter retrieved successfully.",
+      data: newsletter,
+    });
   } catch (error) {
-    res.status(500).json({ error: 'Error fetching newsletter' });
+    next(error);
   }
 };
 
-export const updateNewsletter = async (req: Request, res: Response): Promise<any> => {
-  const { id } = req.params;
+const updateNewsletterSchema = z.object({
+  title: z.string().optional(),
+  content: z.string().optional(),
+  status: z.enum(["active", "inactive"]).optional(),
+});
+
+export const updateNewsletter = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
 
   try {
-    // Validate incoming update data with Zod schema
-    const updateData = NewsletterSchema.partial().parse(req.body);
+    const id = req.params.id;
+    const newsletterId = Number(id);
 
-    // Perform the update operation
-    const updatedNewsletter = await prisma.newsletter.update({
-      where: { id: Number(id) },
-      data: updateData,
+    // Validate the body
+    const validatedData = updateNewsletterSchema.parse(req.body);
+
+    // Check if the newsletter exists
+    const existingNewsletter = await prisma.newsletter.findUnique({
+      where: { id: newsletterId },
     });
 
-    // Log and respond with updated record
-    logger.info(`Newsletter with ID ${id} successfully updated.`);
-    return res.json(updatedNewsletter);
-  } catch (error) {
+    if (!existingNewsletter) {
+      throw new AppError(`Newsletter with ID ${newsletterId} not found.`, 404);
+    }
+
+    if (!existingNewsletter.isActive) {
+      throw new AppError("Cannot update an inactive newsletter", 400);
+    }
+
+    // Update the newsletter
+    const updatedNewsletter = await prisma.newsletter.update({
+      where: { id: newsletterId },
+      data: validatedData,
+    });
+
+    logger.info(`Newsletter with ID ${newsletterId} updated successfully.`);
+    res.status(200).json({
+      success: true,
+      message: "Newsletter updated successfully.",
+      data: updatedNewsletter,
+    });
+  } catch (error: any) {
     // Handle different errors
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === "P2025") {
-        logger.error(`Newsletter with ID ${id} not found.`);
-        return res.status(404).json({ error: "Newsletter not found" });
+      if (error.code === "P2002") {
+        next(new AppError("A newsletter with this title already exists.", 400));
       }
-    } else if (error instanceof z.ZodError) {
-      logger.error("Validation error:", error.errors);
-      return res.status(400).json({ error: "Invalid data provided", details: error.errors });
+    } else if (error.name === "ZodError") {
+      const message = error.errors.map((e: any) => e.message).join(", ");
+      next(new AppError(`Validation error: ${message}`, 400));
     } else {
-      logger.error("Error updating newsletter:", error);
-      return res.status(500).json({ error: "An error occurred while updating the newsletter" });
+      next(error);
     }
   }
 
 };
 
-export const deleteNewsletter = async (req: Request, res: Response): Promise<any> => {
-  const { id } = req.params;
-
+export const deleteNewsletter = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
   try {
-    // Mark the newsletter as inactive instead of deleting
-    const updatedNewsletter = await prisma.newsletter.update({
-      where: { id: Number(id) },
-      data: { isActive: false } as Prisma.NewsletterUpdateInput
+    const id = req.params.id;
+    const newsletterId = Number(id);
+  
+    // Check if the newsletter exists and is active
+    const newsletter = await prisma.newsletter.findUnique({
+      where: { id: newsletterId },
     });
-
-    logger.info(`Newsletter with ID ${id} successfully flagged as inactive.`);
-    return res.status(200).json({ message: "Newsletter flagged as inactive", newsletter: updatedNewsletter });
-  } catch (error) {
-    // Handle cases where the record does not exist
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === "P2025") {
-        logger.error(`Newsletter with ID ${id} not found.`);
-        return res.status(404).json({ error: "Newsletter not found" });
-      }
+  
+    if (!newsletter) {
+      throw new AppError(`Newsletter with ID ${newsletterId} not found`, 404);
     }
-
-    logger.error("Error flagging newsletter as inactive:", error);
-    return res.status(500).json({ error: "An error occurred while flagging the newsletter as inactive" });
+  
+    if (newsletter.isActive === false) {
+      throw new AppError(`Newsletter with ID ${newsletterId} is already inactive`, 400);
+    }
+  
+    // Soft delete the newsletter by updating its isActive
+    await prisma.newsletter.update({
+      where: { id: newsletterId },
+      data: { isActive: false },
+    });
+  
+    res.status(200).json({
+      message: `Newsletter with ID ${newsletterId} has been successfully marked as inactive`,
+    });
+  } catch (error) {
+    next(error)
   }
 };
 
