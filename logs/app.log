@@ -216,3 +216,10 @@ Unique constraint failed on the fields: (`title`)
 2024-11-20T12:21:10.140Z info: [2024-11-20T12:21:10.136Z] POST /api/v1/newsletters
 2024-11-20T12:21:10.198Z info: Token verified for admin: admin1@gmail.com
 2024-11-20T12:21:10.533Z info: Newsletter created with ID: 24
+2024-11-20T20:23:49.067Z info: [2024-11-20T20:23:49.065Z] POST /api/v1/user
+2024-11-20T20:33:53.116Z info: [2024-11-20T20:33:53.114Z] POST /api/v1/user
+2024-11-20T20:38:34.692Z info: [2024-11-20T20:38:34.688Z] POST /api/v1/user
+2024-11-20T20:43:58.815Z info: [2024-11-20T20:43:58.813Z] POST /api/v1/user
+2024-11-20T20:50:02.042Z info: [2024-11-20T20:50:02.040Z] POST /api/v1/user
+2024-11-20T20:54:26.990Z info: [2024-11-20T20:54:26.988Z] POST /api/v1/user
+2024-11-20T20:55:08.419Z info: [2024-11-20T20:55:08.416Z] POST /api/v1/user
