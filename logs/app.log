@@ -49,3 +49,170 @@ Unknown argument `createdAt`. Available options are marked with ?.
 2024-11-03T20:29:54.659Z error: Validation error:
 2024-11-03T20:30:21.150Z info: Newsletter with ID 5 successfully updated.
 2024-11-07T00:39:31.851Z info: Newsletter with ID 5 successfully flagged as inactive.
+2024-11-07T19:09:08.550Z info: [2024-11-07T19:09:08.548Z] GET /api/v1/newsletters
+2024-11-07T19:09:22.781Z info: [2024-11-07T19:09:22.781Z] DELETE /api/v1/newsletters/5
+2024-11-07T19:09:22.799Z info: Newsletter with ID 5 successfully flagged as inactive.
+2024-11-13T08:54:46.967Z info: [2024-11-13T08:54:46.965Z] POST /api/v1/newsletters
+2024-11-13T08:54:46.979Z error: Validation error: [{"code":"invalid_type","expected":"boolean","received":"undefined","path":["isActive"],"message":"Required"}]
+2024-11-13T08:57:13.663Z info: [2024-11-13T08:57:13.663Z] POST /api/v1/newsletters
+2024-11-13T08:57:13.667Z error: Validation error: [{"code":"invalid_type","expected":"boolean","received":"string","path":["isActive"],"message":"Expected boolean, received string"}]
+2024-11-13T08:57:26.669Z info: [2024-11-13T08:57:26.669Z] POST /api/v1/newsletters
+2024-11-13T08:57:26.674Z error: Validation error: [{"code":"invalid_type","expected":"boolean","received":"undefined","path":["isActive"],"message":"Required"}]
+2024-11-14T03:01:25.225Z info: [2024-11-14T03:01:25.224Z] POST /api/v1/newsletters
+2024-11-14T03:01:25.235Z error: Validation error: [{"code":"invalid_type","expected":"boolean","received":"undefined","path":["isActive"],"message":"Required"}]
+2024-11-15T20:05:18.965Z info: [2024-11-15T20:05:18.963Z] POST /api/v1/newsletters
+2024-11-15T20:05:18.984Z error: Validation error: [{"code":"invalid_type","expected":"boolean","received":"undefined","path":["isActive"],"message":"Required"}]
+2024-11-15T20:14:47.600Z info: [2024-11-15T20:14:47.599Z] POST /api/v1/newsletters
+2024-11-15T20:14:47.623Z error: Validation error: [{"code":"invalid_type","expected":"boolean","received":"undefined","path":["isActive"],"message":"Required"}]
+2024-11-15T20:14:54.387Z info: [2024-11-15T20:14:54.387Z] POST /api/v1/newsletters
+2024-11-15T20:14:54.393Z error: Validation error: [{"code":"invalid_type","expected":"boolean","received":"undefined","path":["isActive"],"message":"Required"}]
+2024-11-15T20:20:33.898Z info: [2024-11-15T20:20:33.897Z] POST /api/v1/newsletters
+2024-11-15T20:20:34.296Z info: Newsletter created with ID: 1
+2024-11-15T20:20:56.801Z info: [2024-11-15T20:20:56.801Z] POST /api/v1/newsletters
+2024-11-15T20:20:56.822Z info: Newsletter created with ID: 2
+2024-11-15T20:21:11.355Z info: [2024-11-15T20:21:11.355Z] POST /api/v1/newsletters
+2024-11-15T20:21:11.360Z info: Newsletter created with ID: 3
+2024-11-15T20:21:22.885Z info: [2024-11-15T20:21:22.885Z] POST /api/v1/newsletters
+2024-11-15T20:21:22.894Z info: Newsletter created with ID: 4
+2024-11-15T20:21:36.546Z info: [2024-11-15T20:21:36.546Z] POST /api/v1/newsletters
+2024-11-15T20:21:36.553Z info: Newsletter created with ID: 5
+2024-11-15T20:21:50.095Z info: [2024-11-15T20:21:50.095Z] POST /api/v1/newsletters
+2024-11-15T20:21:50.103Z info: Newsletter created with ID: 6
+2024-11-15T20:25:00.892Z info: [2024-11-15T20:25:00.892Z] GET /api/v1/newsletters
+2024-11-15T20:26:06.236Z info: [2024-11-15T20:26:06.236Z] GET /api/v1/newsletters?limit=3
+2024-11-15T20:26:28.608Z info: [2024-11-15T20:26:28.608Z] GET /api/v1/newsletters
+2024-11-15T20:27:03.977Z info: [2024-11-15T20:27:03.977Z] GET /api/v1/newsletters
+2024-11-15T20:27:33.525Z info: [2024-11-15T20:27:33.523Z] GET /api/v1/newsletters
+2024-11-15T20:27:42.920Z info: [2024-11-15T20:27:42.920Z] GET /api/v1/newsletters?title=November%203%20Newsletter
+2024-11-15T20:27:51.063Z info: [2024-11-15T20:27:51.063Z] GET /api/v1/newsletters/4
+2024-11-15T20:28:42.315Z info: [2024-11-15T20:28:42.315Z] PATCH /api/v1/newsletters/2
+2024-11-15T20:28:42.353Z info: Newsletter with ID 2 successfully updated.
+2024-11-15T20:28:55.805Z info: [2024-11-15T20:28:55.804Z] GET /api/v1/newsletters
+2024-11-15T20:31:29.121Z info: [2024-11-15T20:31:29.121Z] GET /api/v1/newsletters?title=November%202%20Newsletter
+2024-11-15T20:32:03.957Z info: [2024-11-15T20:32:03.957Z] DELETE /api/v1/newsletters/5
+2024-11-15T20:32:03.965Z info: Newsletter with ID 5 successfully flagged as inactive.
+2024-11-15T20:32:15.219Z info: [2024-11-15T20:32:15.219Z] GET /api/v1/newsletters
+2024-11-16T22:35:57.169Z info: [2024-11-16T22:35:57.166Z] POST /api/v1/admin
+2024-11-16T22:36:54.765Z info: [2024-11-16T22:36:54.763Z] POST /api/v1/admin/register
+2024-11-16T22:36:55.866Z info: Admin registered: Admin_One
+2024-11-16T22:37:35.816Z info: [2024-11-16T22:37:35.816Z] GET /api/v1/newsletters
+2024-11-16T22:38:26.499Z info: [2024-11-16T22:38:26.499Z] POST /api/v1/admin/register
+2024-11-16T22:38:26.819Z info: Admin registered: Admin_Two
+2024-11-16T23:26:27.803Z info: [2024-11-16T23:26:27.801Z] POST /api/v1/admin/login
+2024-11-16T23:26:28.747Z info: Admin logged in: Admin_Two
+2024-11-17T21:23:59.735Z info: [2024-11-17T21:23:59.733Z] POST /api/v1/admin/login
+2024-11-17T21:24:00.661Z info: Admin logged in: Admin_Two
+2024-11-19T07:47:12.028Z info: [2024-11-19T07:47:12.026Z] POST /api/v1/admin/login
+2024-11-19T07:47:12.541Z info: Admin logged in: Admin_One
+2024-11-19T07:50:05.659Z info: [2024-11-19T07:50:05.659Z] POST /api/v1/newsletters
+2024-11-19T09:00:08.932Z info: [2024-11-19T09:00:08.930Z] POST /api/v1/newsletters
+2024-11-19T09:00:09.463Z error: Creation failed: 
+Invalid `prisma.newsletter.create()` invocation in
+C:\Users\USER\OneDrive\Desktop\newsletter-api\src\controllers\newsletterController.ts:22:51
+
+  19 //   },
+  20 // });
+  21 
+→ 22 const newNewsletter = await prisma.newsletter.create(
+Unique constraint failed on the fields: (`title`)
+2024-11-19T09:02:32.075Z info: [2024-11-19T09:02:32.075Z] POST /api/v1/newsletters
+2024-11-19T09:02:32.116Z info: Newsletter created with ID: 8
+2024-11-19T09:05:01.066Z info: [2024-11-19T09:05:01.063Z] POST /api/v1/newsletters
+2024-11-19T09:05:01.312Z info: Newsletter created with ID: 9
+2024-11-19T09:06:34.451Z info: [2024-11-19T09:06:34.449Z] POST /api/v1/newsletters
+2024-11-19T09:06:34.610Z info: Newsletter created with ID: 10
+2024-11-19T09:08:28.067Z info: [2024-11-19T09:08:28.063Z] POST /api/v1/newsletters
+2024-11-19T09:08:28.398Z info: Newsletter created with ID: 11
+2024-11-19T13:48:13.421Z info: [2024-11-19T13:48:13.419Z] POST /api/v1/newsletters
+2024-11-19T13:48:13.461Z info: Token verified for admin: admin1@gmail.com
+2024-11-19T13:48:13.940Z info: Newsletter created with ID: 12
+2024-11-19T13:58:24.115Z info: [2024-11-19T13:58:24.114Z] POST /api/v1/newsletters
+2024-11-19T13:58:24.137Z info: Token verified for admin: admin1@gmail.com
+2024-11-19T13:58:24.294Z info: Newsletter created with ID: 13
+2024-11-19T14:16:47.556Z info: [2024-11-19T14:16:47.554Z] POST /api/v1/newsletters
+2024-11-19T14:16:47.601Z info: Token verified for admin: admin1@gmail.com
+2024-11-19T14:16:47.948Z info: Newsletter created with ID: 14
+2024-11-19T14:17:52.343Z info: [2024-11-19T14:17:52.342Z] POST /api/v1/newsletters
+2024-11-19T14:17:52.369Z error: Invalid token: invalid signature
+2024-11-19T14:20:29.745Z info: [2024-11-19T14:20:29.744Z] POST /api/v1/newsletters
+2024-11-19T14:20:29.764Z info: Token verified for admin: admin1@gmail.com
+2024-11-19T14:20:29.936Z info: Newsletter created with ID: 15
+2024-11-19T14:25:44.504Z info: [2024-11-19T14:25:44.502Z] POST /api/v1/newsletters
+2024-11-19T14:25:44.535Z info: Token verified for admin: admin1@gmail.com
+2024-11-19T14:25:44.898Z error: Creation failed: 
+Invalid `prisma.newsletter.create()` invocation in
+C:\Users\USER\OneDrive\Desktop\newsletter-api\src\controllers\newsletterController.ts:22:51
+
+  19 //   },
+  20 // });
+  21 
+→ 22 const newNewsletter = await prisma.newsletter.create(
+Unique constraint failed on the fields: (`title`)
+2024-11-20T02:27:01.896Z info: [2024-11-20T02:27:01.893Z] POST /api/v1/newsletters
+2024-11-20T02:27:01.935Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T02:27:02.352Z info: Newsletter created with ID: 17
+2024-11-20T02:39:43.631Z info: [2024-11-20T02:39:43.628Z] POST /api/v1/newsletters
+2024-11-20T02:39:43.698Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T02:39:44.279Z info: Newsletter created with ID: 18
+2024-11-20T02:39:49.126Z info: [2024-11-20T02:39:49.126Z] POST /api/v1/newsletters
+2024-11-20T02:39:49.142Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T02:40:42.596Z info: [2024-11-20T02:40:42.595Z] POST /api/v1/newsletters
+2024-11-20T02:40:42.607Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T02:42:49.826Z info: [2024-11-20T02:42:49.825Z] POST /api/v1/newsletters
+2024-11-20T02:42:49.846Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T03:12:16.427Z info: [2024-11-20T03:12:16.425Z] PATCH /api/v1/newsletters/5
+2024-11-20T03:13:44.433Z info: [2024-11-20T03:13:44.430Z] PATCH /api/v1/newsletters/5
+2024-11-20T03:14:18.071Z info: [2024-11-20T03:14:18.069Z] PATCH /api/v1/newsletters/50
+2024-11-20T03:14:43.698Z info: [2024-11-20T03:14:43.697Z] PATCH /api/v1/newsletters/5
+2024-11-20T03:22:06.725Z info: [2024-11-20T03:22:06.723Z] PATCH /api/v1/newsletters/5
+2024-11-20T03:49:29.787Z info: [2024-11-20T03:49:29.785Z] GET /api/v1/newsletters/40
+2024-11-20T04:00:14.839Z info: [2024-11-20T04:00:14.835Z] DELETE /api/v1/newsletters/5
+2024-11-20T04:00:26.842Z info: [2024-11-20T04:00:26.842Z] DELETE /api/v1/newsletters/77
+2024-11-20T04:00:52.124Z info: [2024-11-20T04:00:52.124Z] DELETE /api/v1/newsletters/as
+2024-11-20T04:01:02.058Z info: [2024-11-20T04:01:02.058Z] DELETE /api/v1/newsletters/2
+2024-11-20T10:15:30.558Z info: [2024-11-20T10:15:30.556Z] GET /api/v1/newsletters
+2024-11-20T10:17:20.356Z info: [2024-11-20T10:17:20.355Z] GET /api/v1/newsletters?title=Updated%20November%202%20Newsletter
+2024-11-20T10:17:20.364Z error: Error from logger: No newsletter found
+2024-11-20T10:17:52.392Z info: [2024-11-20T10:17:52.392Z] GET /api/v1/newsletters?startDate=2024-10-31
+2024-11-20T10:18:10.551Z info: [2024-11-20T10:18:10.551Z] GET /api/v1/newsletters?endDate=2024-07-03
+2024-11-20T10:18:10.562Z error: Error from logger: No newsletter found
+2024-11-20T10:39:47.266Z info: [2024-11-20T10:39:47.264Z] GET /api/v1/newsletters?title=Updated%20November%202%20Newsletter
+2024-11-20T10:39:47.581Z error: Error fetching newsletters: No newsletters found with the specified criteria
+2024-11-20T10:39:59.402Z info: [2024-11-20T10:39:59.402Z] GET /api/v1/newsletters?limit=3
+2024-11-20T10:40:39.062Z info: [2024-11-20T10:40:39.062Z] GET /api/v1/newsletters?search=16
+2024-11-20T10:41:34.682Z info: [2024-11-20T10:41:34.682Z] GET /api/v1/newsletters?search=updated
+2024-11-20T10:41:34.697Z error: Error fetching newsletters: No newsletters found with the specified criteria
+2024-11-20T10:41:45.110Z info: [2024-11-20T10:41:45.110Z] GET /api/v1/newsletters?search=wel
+2024-11-20T10:42:00.402Z info: [2024-11-20T10:42:00.402Z] GET /api/v1/newsletters?search=etter
+2024-11-20T11:26:48.432Z info: [2024-11-20T11:26:48.430Z] POST /api/v1/admin/login
+2024-11-20T11:26:49.336Z info: Admin logged in: Admin_One
+2024-11-20T11:28:23.955Z info: [2024-11-20T11:28:23.955Z] POST /api/v1/newsletters
+2024-11-20T11:28:23.967Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T11:28:24.023Z info: Newsletter created with ID: 19
+2024-11-20T11:29:15.860Z info: [2024-11-20T11:29:15.860Z] PATCH /api/v1/newsletters/19
+2024-11-20T11:29:15.903Z info: Newsletter with ID 19 updated successfully.
+2024-11-20T11:30:08.548Z info: [2024-11-20T11:30:08.547Z] POST /api/v1/newsletters
+2024-11-20T11:30:08.555Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T11:30:08.566Z info: Newsletter created with ID: 20
+2024-11-20T11:30:12.192Z info: [2024-11-20T11:30:12.192Z] POST /api/v1/newsletters
+2024-11-20T11:30:12.204Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T11:30:24.374Z info: [2024-11-20T11:30:24.374Z] POST /api/v1/newsletters
+2024-11-20T11:30:24.388Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T11:30:57.625Z info: [2024-11-20T11:30:57.623Z] POST /api/v1/newsletters
+2024-11-20T11:30:57.647Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T11:40:50.483Z info: [2024-11-20T11:40:50.480Z] POST /api/v1/newsletters
+2024-11-20T11:40:50.529Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T11:40:50.814Z info: Newsletter created with ID: 21
+2024-11-20T11:42:08.521Z info: [2024-11-20T11:42:08.521Z] POST /api/v1/newsletters
+2024-11-20T11:42:08.558Z error: Invalid token: invalid signature
+2024-11-20T12:00:03.807Z info: [2024-11-20T12:00:03.805Z] POST /api/v1/newsletters
+2024-11-20T12:00:03.864Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T12:00:04.208Z info: Newsletter created with ID: 22
+2024-11-20T12:15:58.690Z info: [2024-11-20T12:15:58.689Z] POST /api/v1/newsletters
+2024-11-20T12:15:58.739Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T12:15:59.074Z info: Newsletter created with ID: 23
+2024-11-20T12:18:46.271Z info: [2024-11-20T12:18:46.269Z] DELETE /api/v1/newsletters/23
+2024-11-20T12:18:46.295Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T12:21:10.140Z info: [2024-11-20T12:21:10.136Z] POST /api/v1/newsletters
+2024-11-20T12:21:10.198Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T12:21:10.533Z info: Newsletter created with ID: 24

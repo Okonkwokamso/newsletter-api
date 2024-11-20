@@ -13,6 +13,9 @@ export const createNewsletter = async (req: Request, res: Response, next: NextFu
 
     const { title, content } = validatedData;
 
+    const admin = res.locals.admin; // Extract admin info
+    console.log(`Admin ID: ${admin.id} is creating a newsletter`);
+
     const existingNewsletter = await prisma.newsletter.findUnique({
       where: { title }
     });

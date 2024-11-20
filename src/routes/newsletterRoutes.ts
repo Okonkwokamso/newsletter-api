@@ -15,10 +15,9 @@ const router = Router();
 
 //router.post('/', validateRequest(NewsletterInput), createNewsletter);
 router.post('/', verifyJwt, createNewsletter);
-//router.post('/', createNewsletter);
 router.get('/', getAllNewsletters);
 router.get('/:id', validateId, getNewsletterById);
-router.patch('/:id', validateId, updateNewsletter);
-router.delete('/:id', validateId, deleteNewsletter);
+router.patch('/:id', verifyJwt, validateId, updateNewsletter);
+router.delete('/:id', verifyJwt, validateId, deleteNewsletter);
 
 export default router;

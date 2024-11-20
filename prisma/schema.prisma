@@ -23,3 +23,13 @@ model Newsletter {
   updatedAt    DateTime @updatedAt 
   isActive     Boolean  @default(true)
 }
+
+model Admin {
+  id       Int      @id @default(autoincrement())
+  username String   @unique
+  password String
+  email    String   @unique
+  role     String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
