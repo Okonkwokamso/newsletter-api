@@ -1,8 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import { createUserSchema } from "../schemas/userSchema";
+import { createUserSchema, subscriptionSchema } from "../schemas/userSchema";
 import prisma from "../config/prismaClient";
 import { AppError } from "../utils/AppError";
 import logger from "../utils/logger";
+import { sendEmail } from "../utils/emailService";
 
 export const createUser = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -70,6 +71,43 @@ export const getAllUsers = async (req: Request, res: Response, next: NextFunctio
     });
   } catch (error) {
     logger.error(`Error fetching users: ${(error as Error).message}`);
+    next(error);
+  }
+};
+
+export const updateSubscription = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const { isSubscribed } = subscriptionSchema.parse(req.body);
+
+    // Validate the input
+    if (typeof isSubscribed !== "boolean") {
+      throw new AppError("Invalid value for 'isSubscribed'. Must be true or false.", 400);
+    }
+
+    // Update the subscription status
+    const updatedUser = await prisma.user.update({
+      where: { id: parseInt(id, 10) },
+      data: { isSubscribed },
+    });
+
+    // Send confirmation email
+    const action = isSubscribed ? "Subscribed" : "Unsubscribed";
+    await sendEmail({
+      to: updatedUser.email,
+      subject: `Newsletter Subscription Update`,
+      text: `You have successfully ${action} to our newsletters.`,
+    });
+
+    res.status(200).json({
+      message: `User has been ${isSubscribed ? "subscribed" : "unsubscribed"} successfully.`,
+      data: updatedUser,
+    });
+  } catch (error: any) {
+    if (error.code === "P2025") {
+      // Handle case when user not found
+      return next(new AppError("User not found.", 404));
+    }
     next(error);
   }
 };

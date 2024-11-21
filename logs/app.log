@@ -223,3 +223,47 @@ Unique constraint failed on the fields: (`title`)
 2024-11-20T20:50:02.042Z info: [2024-11-20T20:50:02.040Z] POST /api/v1/user
 2024-11-20T20:54:26.990Z info: [2024-11-20T20:54:26.988Z] POST /api/v1/user
 2024-11-20T20:55:08.419Z info: [2024-11-20T20:55:08.416Z] POST /api/v1/user
+2024-11-20T20:56:40.946Z info: [2024-11-20T20:56:40.946Z] POST /api/v1/admin/login
+2024-11-20T20:56:41.215Z info: Admin logged in: Admin_One
+2024-11-20T20:57:30.794Z info: [2024-11-20T20:57:30.794Z] GET /api/v1/user
+2024-11-20T20:57:30.807Z info: Token verified for admin: admin1@gmail.com
+2024-11-20T21:18:36.347Z info: [2024-11-20T21:18:36.345Z] PATCH /api/v1/user/2/subscription
+2024-11-20T21:18:49.915Z info: [2024-11-20T21:18:49.915Z] PATCH /api/v1/user/2/subscription
+2024-11-20T21:19:02.467Z info: [2024-11-20T21:19:02.467Z] PATCH /api/v1/user/1/subscription
+2024-11-21T03:15:03.369Z info: [2024-11-21T03:15:03.367Z] PATCH /api/v1/user/2/subscription
+2024-11-21T03:15:25.265Z error: Failed to send email: connect ETIMEDOUT 54.158.84.126:587
+2024-11-21T03:19:09.397Z info: [2024-11-21T03:19:09.394Z] PATCH /api/v1/user/2/subscription
+2024-11-21T03:19:30.881Z error: Failed to send email: connect ETIMEDOUT 18.215.44.90:587
+2024-11-21T03:23:03.085Z info: [2024-11-21T03:23:03.083Z] PATCH /api/v1/user/2/subscription
+2024-11-21T03:23:25.000Z error: Failed to send email: connect ETIMEDOUT 54.158.84.126:587
+2024-11-21T03:26:36.188Z info: [2024-11-21T03:26:36.186Z] PATCH /api/v1/user/2/subscription
+2024-11-21T03:26:38.353Z error: Failed to send email: 4C180000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+2024-11-21T03:28:05.658Z info: [2024-11-21T03:28:05.655Z] PATCH /api/v1/user/2/subscription
+2024-11-21T03:28:06.826Z error: Failed to send email: 281E0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+2024-11-21T03:31:14.277Z info: [2024-11-21T03:31:14.275Z] PATCH /api/v1/user/2/subscription
+2024-11-21T03:31:15.753Z error: Failed to send email: 50520000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+2024-11-21T03:36:41.823Z info: [2024-11-21T03:36:41.820Z] PATCH /api/v1/user/2/subscription
+2024-11-21T03:37:03.860Z error: Failed to send email: connect ETIMEDOUT 3.219.2.182:25
+2024-11-21T03:38:05.979Z info: [2024-11-21T03:38:05.975Z] PATCH /api/v1/user/2/subscription
+2024-11-21T03:38:07.710Z error: Failed to send email: A43C0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+2024-11-21T03:43:26.264Z info: [2024-11-21T03:43:26.261Z] PATCH /api/v1/user/2/subscription
+2024-11-21T03:43:27.616Z error: Failed to send email: 24240000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+2024-11-21T15:03:04.235Z info: [2024-11-21T15:03:04.232Z] PATCH /api/v1/user/2/subscription
+2024-11-21T15:03:06.406Z error: Failed to send email: BC110000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+2024-11-21T15:14:53.523Z info: [2024-11-21T15:14:53.521Z] PATCH /api/v1/user/2/subscription
+2024-11-21T15:14:55.286Z error: Failed to send email: 14360000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+2024-11-21T15:17:28.928Z info: [2024-11-21T15:17:28.925Z] PATCH /api/v1/user/2/subscription
+2024-11-21T15:17:38.892Z error: Failed to send email: 942E0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+2024-11-21T15:19:35.776Z info: [2024-11-21T15:19:35.773Z] PATCH /api/v1/user/2/subscription
+2024-11-21T15:19:37.089Z error: Failed to send email: 582F0000:error:0A00010B:SSL routines:ssl3_get_record:wrong version number:c:\ws\deps\openssl\openssl\ssl\record\ssl3_record.c:355:
+
+2024-11-21T15:46:34.556Z info: [2024-11-21T15:46:34.554Z] PATCH /api/v1/user/2/subscription
+2024-11-21T15:46:40.122Z info: Email sent: <2334fcff-d95c-a221-ab06-e24990c111ac@30b2cb6fbe012a>

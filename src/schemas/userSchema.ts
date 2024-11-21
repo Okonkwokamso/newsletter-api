@@ -5,4 +5,10 @@ export const createUserSchema = z.object({
   isSubscribed: z.boolean().default(true)
 });
 
+export const subscriptionSchema = z.object({
+  isSubscribed: z.boolean({
+    required_error: "'isSubscribed' is required and must be a boolean",
+  }),
+});
+
 export type CreateUserInput = z.infer<typeof createUserSchema>;
