@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import { Prisma, PrismaClient } from "@prisma/client";
 import { ZodError } from "zod";
@@ -6,6 +6,8 @@ import jwt from "jsonwebtoken";
 import prisma from "../config/prismaClient";
 import { AdminInput, AdminSchema, AdminLoginInput, AdminLoginSchema } from "../schemas/adminSchema";
 import logger from "../utils/logger";
+import { sendEmail } from "../utils/emailService";
+import { AppError } from "../utils/AppError";
 
 export const registerAdmin = async (req: Request, res: Response): Promise<any> => {
   try {
@@ -91,7 +93,74 @@ export const loginAdmin = async (req: Request, res: Response): Promise<any> => {
   }
 };
 
+export const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const users = await prisma.user.findMany({
+      where: {
+        isSubscribed: true,
+      },
+      select: {
+        id: true,
+        email: true,
+        createdAt: true,
+        updatedAt: true,
+      }
+    });
 
+    if (!users.length) {
+      throw new AppError("No subscribed users found", 404);
+      
+    }
+
+    res.status(200).json({
+      success: true,
+      data: users
+    });
+  } catch (error) {
+    logger.error(`Error fetching users: ${(error as Error).message}`);
+    next(error);
+  }
+};
+
+
+export const sendNewsletter = async (next: NextFunction) => {
+    try {
+      // Fetch all subscribed users
+      const subscribedUsers = await prisma.user.findMany({
+        where: { isSubscribed: true },
+      });
+
+      if (subscribedUsers.length === 0) {
+        console.log("No subscribed users found.");
+        return;
+      }
+
+      // Send the newsletter to each user
+      const newsletterTitle = "Latest Updates from Our Newsletter!";
+      const newsletterLink = `${process.env.BASE_URL}/newsletter/123`;
+
+      for (const user of subscribedUsers) {
+        await sendEmail({
+          to: user.email, 
+          subject: "Your Latest Newsletter", 
+          templateFileName: "newsletter", 
+          replacements: {
+            username: "Valued User",
+            newsletterLink,
+            newsletterTitle,
+            unsubscribeLink: `${process.env.BASE_URL}/user/${user.id}/unsubscribe`,
+        }});
+      }
+
+      console.log("Newsletter sent to all subscribed users.");
+    } catch (error: any) {
+      if (error.code === "P2025") {
+        // Handle case when user not found
+        return next(new AppError("User not found.", 404));
+      }
+      next(error);
+    }
+};
 
 
 

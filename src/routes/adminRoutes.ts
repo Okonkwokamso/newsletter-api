@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { registerAdmin, loginAdmin } from "../controllers/admincontroller";
+import { registerAdmin, loginAdmin, sendNewsletter, getAllUsers } from "../controllers/admincontroller";
 import { verifyJwt } from "../middleware/verifyJwt";
 import { validateRequest } from "../middleware/validateRequest";
 
@@ -7,17 +7,11 @@ const adminRouter = Router();
 
 adminRouter.post('/register', registerAdmin);
 adminRouter.post('/login', loginAdmin);
+adminRouter.get('/', verifyJwt, getAllUsers)
+adminRouter.post('/sendnewsletter', sendNewsletter)
 
-// router.get("/dashboard", verifyJwt, (req, res) => {
-//   return res.status(200).json({
-//     message: `Welcome to the admin dashboard, ${req.admin?.username}!`,
-//   });
-// });
 
 export default adminRouter;
-
-
-
 
 
 // import express from "express";

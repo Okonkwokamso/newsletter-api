@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exciting News Just for You!</h1>
+    <p>Hello {{username}},</p>
+    <p>We’re thrilled to share our latest newsletter: <a href="{{newsletterLink}}" target="_blank">{{newsletterTitle}}</a>.</p>
+    <p>Click the link above to view it directly on our website.</p>
+    <p>If you’d prefer not to receive future newsletters, you can <a href="{{unsubscribeLink}}" target="_blank">unsubscribe here</a>.</p>
+    <div class="footer">
+        <p>Thank you,</p>
+        <p>The Newsletter Team</p>
+    </div>
+</body>
+</html>

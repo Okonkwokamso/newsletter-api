@@ -267,3 +267,9 @@ Unique constraint failed on the fields: (`title`)
 
 2024-11-21T15:46:34.556Z info: [2024-11-21T15:46:34.554Z] PATCH /api/v1/user/2/subscription
 2024-11-21T15:46:40.122Z info: Email sent: <2334fcff-d95c-a221-ab06-e24990c111ac@30b2cb6fbe012a>
+2024-11-21T15:48:42.792Z info: [2024-11-21T15:48:42.790Z] PATCH /api/v1/user/2/subscription
+2024-11-21T15:49:17.422Z info: Email sent: <ed4addde-6e5c-f943-6312-120d39f22dc2@30b2cb6fbe012a>
+2024-11-22T15:13:50.671Z info: [2024-11-22T15:13:50.667Z] PATCH /api/v1/user/2/subscription
+2024-11-22T15:17:03.530Z info: [2024-11-22T15:17:03.528Z] PATCH /api/v1/user/2/subscription
+2024-11-22T15:18:49.825Z info: [2024-11-22T15:18:49.822Z] PATCH /api/v1/user/2/subscription
+2024-11-22T15:19:39.802Z info: [2024-11-22T15:19:39.802Z] GET /api/v1/user/2/unsuscribe

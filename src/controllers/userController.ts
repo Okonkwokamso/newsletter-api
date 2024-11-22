@@ -46,38 +46,9 @@ export const createUser = async (req: Request, res: Response, next: NextFunction
   }
 };
 
-export const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const users = await prisma.user.findMany({
-      where: {
-        isSubscribed: true,
-      },
-      select: {
-        id: true,
-        email: true,
-        createdAt: true,
-        updatedAt: true,
-      }
-    });
-
-    if (!users.length) {
-      throw new AppError("No subscribed users found", 404);
-      
-    }
-
-    res.status(200).json({
-      success: true,
-      data: users
-    });
-  } catch (error) {
-    logger.error(`Error fetching users: ${(error as Error).message}`);
-    next(error);
-  }
-};
-
 export const updateSubscription = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { id } = req.params;
+    const userId = parseInt(req.params.id, 10);
     const { isSubscribed } = subscriptionSchema.parse(req.body);
 
     // Validate the input
@@ -87,17 +58,23 @@ export const updateSubscription = async (req: Request, res: Response, next: Next
 
     // Update the subscription status
     const updatedUser = await prisma.user.update({
-      where: { id: parseInt(id, 10) },
+      where: { id: userId },
       data: { isSubscribed },
     });
 
-    // Send confirmation email
-    const action = isSubscribed ? "Subscribed" : "Unsubscribed";
+    // Send email to user about their updated subscription status
+    const emailSubject = isSubscribed ? "You've Subscribed to Our Newsletter!" : "You've Unsubscribed from Our Newsletter";
+
+    const templateFileName = isSubscribed ? "subscribe.html" : "unsubscribe.html";
+
     await sendEmail({
-      to: updatedUser.email,
-      subject: `Newsletter Subscription Update`,
-      text: `You have successfully ${action} to our newsletters.`,
-    });
+      to: updatedUser.email, 
+      subject: emailSubject, 
+      templateFileName: templateFileName, 
+      replacements: {
+        username: "Valued User",
+        unsubscribeLink: `${process.env.BASE_URL}/user/${userId}/unsubscribe`,
+    }}); 
 
     res.status(200).json({
       message: `User has been ${isSubscribed ? "subscribed" : "unsubscribed"} successfully.`,
@@ -111,3 +88,5 @@ export const updateSubscription = async (req: Request, res: Response, next: Next
     next(error);
   }
 };
+
+
