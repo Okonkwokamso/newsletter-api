@@ -4,6 +4,7 @@ import { Prisma, PrismaClient } from "@prisma/client";
 import prisma from '../config/prismaClient'; 
 import { NewsletterSchema, NewsletterInput } from "../schemas/newsletterSchema";
 import { AppError } from "../utils/AppError";
+import { sendEmail } from "../utils/emailService";
 import logger from "../utils/logger";
 
 export const createNewsletter = async (req: Request, res: Response, next: NextFunction):Promise<any>  => {
@@ -30,7 +31,46 @@ export const createNewsletter = async (req: Request, res: Response, next: NextFu
         isActive: validatedData.isActive ?? true
       },
     });
+
+    // Fetch subscribed users' emails
+    const subscribedUsers = await prisma.user.findMany({
+      where: { isSubscribed: true },
+      select: {
+        email: true
+      }
+    });
+
+    logger.info(`Our Users: ${subscribedUsers}`)
+
+
+    if (!subscribedUsers.length) {
+      return res.status(201).json({
+        message: "Newsletter created, but no subscribed users to notify.",
+        newNewsletter,
+      });
+    }
+
+    // Step 3: Build email-sending tasks
+    const emailTasks = subscribedUsers.map((user) => {
+      const replacements = {
+        username: "Subscriber",
+        newsletterTitle: title,
+        newsletterLink: `${process.env.BASE_URL}/newsletters/${newNewsletter.id}`,
+        unsubscribeLink: `${process.env.BASE_URL}/api/v1/user/unsubscribe?email=${encodeURIComponent(
+          user.email
+        )}`,
+      };
+
+      return sendEmail({
+        to: user.email,
+        subject: `New Newsletter: ${title}`,
+        templateFileName: "newsletter.html",
+        replacements,
+      });
+    });
     
+    await Promise.all(emailTasks);
+
     // Log successful creation
     logger.info(`Newsletter created with ID: ${newNewsletter.id}`)
 

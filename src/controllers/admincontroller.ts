@@ -107,6 +107,7 @@ export const getAllUsers = async (req: Request, res: Response, next: NextFunctio
       }
     });
 
+
     if (!users.length) {
       throw new AppError("No subscribed users found", 404);
       
@@ -123,44 +124,48 @@ export const getAllUsers = async (req: Request, res: Response, next: NextFunctio
 };
 
 
-export const sendNewsletter = async (next: NextFunction) => {
-    try {
-      // Fetch all subscribed users
-      const subscribedUsers = await prisma.user.findMany({
-        where: { isSubscribed: true },
-      });
+// export const sendNewsletterEmail = async () => {
+//     try {
+//       // Fetch all subscribed users
+//       const subscribedUsers = await prisma.user.findMany({
+//         where: { isSubscribed: true },
+//       });
+//       logger.info(`First log: ${subscribedUsers}`)
 
-      if (subscribedUsers.length === 0) {
-        console.log("No subscribed users found.");
-        return;
-      }
+//       if (subscribedUsers.length === 0) {
+//         console.log("No subscribed users found.");
+//         return;
+//       }
 
-      // Send the newsletter to each user
-      const newsletterTitle = "Latest Updates from Our Newsletter!";
-      const newsletterLink = `${process.env.BASE_URL}/newsletter/123`;
+//       // Send the newsletter to each user
+//       const newsletterTitle = "Latest Updates from Our Newsletter!";
+//       const newsletterLink = `${process.env.BASE_URL}/newsletter/123`;
 
-      for (const user of subscribedUsers) {
-        await sendEmail({
-          to: user.email, 
-          subject: "Your Latest Newsletter", 
-          templateFileName: "newsletter", 
-          replacements: {
-            username: "Valued User",
-            newsletterLink,
-            newsletterTitle,
-            unsubscribeLink: `${process.env.BASE_URL}/user/${user.id}/unsubscribe`,
-        }});
-      }
+//       logger.info(`Second log: ${newsletterTitle} & ${newsletterTitle}`)
 
-      console.log("Newsletter sent to all subscribed users.");
-    } catch (error: any) {
-      if (error.code === "P2025") {
-        // Handle case when user not found
-        return next(new AppError("User not found.", 404));
-      }
-      next(error);
-    }
-};
+//       for (const user of subscribedUsers) {
+//         await sendEmail({
+//           to: user.email, 
+//           subject: "Your Latest Newsletter", 
+//           templateFileName: "newsletter", 
+//           replacements: {
+//             name: "Valued User",
+//             newsletterLink,
+//             newsletterTitle,
+//             unsubscribeLink: `${process.env.BASE_URL}/user/${user.id}/unsubscribe`,
+//         }});
+//       }
+
+//       console.log("Newsletter sent to all subscribed users.");
+//     } catch (error: any) {
+//       if (error.code === "P2025") {
+//         // Handle case when user not found
+//         throw (new AppError("User not found.", 404));
+      
+//       }
+      
+//     }
+// };
 
 
 

@@ -273,3 +273,41 @@ Unique constraint failed on the fields: (`title`)
 2024-11-22T15:17:03.530Z info: [2024-11-22T15:17:03.528Z] PATCH /api/v1/user/2/subscription
 2024-11-22T15:18:49.825Z info: [2024-11-22T15:18:49.822Z] PATCH /api/v1/user/2/subscription
 2024-11-22T15:19:39.802Z info: [2024-11-22T15:19:39.802Z] GET /api/v1/user/2/unsuscribe
+2024-11-23T07:32:39.979Z info: [2024-11-23T07:32:39.977Z] PATCH /api/v1/user/2/subscription
+2024-11-23T07:34:12.359Z info: [2024-11-23T07:34:12.359Z] PATCH /api/v1/user/2/subscription
+2024-11-23T07:41:17.392Z info: [2024-11-23T07:41:17.389Z] PATCH /api/v1/user/2/subscription
+2024-11-23T07:41:32.578Z info: [2024-11-23T07:41:32.578Z] PATCH /api/v1/user/2/subscription
+2024-11-23T07:46:45.917Z info: [2024-11-23T07:46:45.914Z] PATCH /api/v1/user/2/subscription
+2024-11-23T07:50:47.666Z info: [2024-11-23T07:50:47.663Z] PATCH /api/v1/user/2/subscription
+2024-11-23T07:57:50.933Z info: [2024-11-23T07:57:50.931Z] PATCH /api/v1/user/2/subscription
+2024-11-23T07:59:07.419Z info: [2024-11-23T07:59:07.416Z] PATCH /api/v1/user/2/subscription
+2024-11-23T08:05:32.483Z info: [2024-11-23T08:05:32.480Z] PATCH /api/v1/user/2/subscription
+2024-11-23T08:09:29.667Z info: [2024-11-23T08:09:29.665Z] PATCH /api/v1/user/2/subscription
+2024-11-23T08:14:22.225Z info: [2024-11-23T08:14:22.224Z] PATCH /api/v1/user/2/subscribe
+2024-11-23T08:38:55.418Z info: [2024-11-23T08:38:55.415Z] PATCH /api/v1/user/2/subscribe
+2024-11-23T08:39:23.779Z info: [2024-11-23T08:39:23.776Z] PATCH /api/v1/user/2/subscribtion
+2024-11-23T08:39:39.687Z info: [2024-11-23T08:39:39.687Z] PATCH /api/v1/user/2/subscribtion
+2024-11-23T08:39:59.159Z info: [2024-11-23T08:39:59.159Z] PATCH /api/v1/user/2/subscription
+2024-11-23T08:40:14.995Z info: [2024-11-23T08:40:14.995Z] PATCH /api/v1/user/2/subscription
+2024-11-23T11:12:50.691Z info: [2024-11-23T11:12:50.688Z] GET /api/v1/user
+2024-11-23T11:13:10.734Z info: [2024-11-23T11:13:10.734Z] GET /api/v1/admin
+2024-11-23T11:13:10.769Z info: Token verified for admin: admin1@gmail.com
+2024-11-23T11:14:29.202Z info: [2024-11-23T11:14:29.198Z] POST /api/v1/admin/notifyusers
+2024-11-23T11:20:31.485Z info: [2024-11-23T11:20:31.483Z] POST /api/v1/admin/notifyusers
+2024-11-23T11:25:38.594Z info: [2024-11-23T11:25:38.592Z] POST /api/v1/admin/notifyusers
+2024-11-23T15:50:03.646Z info: [2024-11-23T15:50:03.644Z] POST /api/v1/admin/notifyusers
+2024-11-23T15:50:04.238Z info: First log: [object Object],[object Object]
+2024-11-23T15:50:04.240Z info: Second log: Latest Updates from Our Newsletter! & Latest Updates from Our Newsletter!
+2024-11-23T16:43:31.964Z info: [2024-11-23T16:43:31.963Z] POST /api/v1/newsletters
+2024-11-23T16:43:32.001Z info: Token verified for admin: admin1@gmail.com
+2024-11-23T16:45:35.230Z info: [2024-11-23T16:45:35.227Z] POST /api/v1/newsletters
+2024-11-23T16:45:35.287Z info: Token verified for admin: admin1@gmail.com
+2024-11-23T16:45:54.883Z info: [2024-11-23T16:45:54.883Z] POST /api/v1/newsletters
+2024-11-23T16:45:54.891Z info: Token verified for admin: admin1@gmail.com
+2024-11-23T16:45:54.969Z info: Our Users: [object Object],[object Object]
+2024-11-23T16:48:14.775Z info: [2024-11-23T16:48:14.772Z] POST /api/v1/newsletters
+2024-11-23T16:48:14.821Z info: Token verified for admin: admin1@gmail.com
+2024-11-23T16:48:15.126Z info: Our Users: [object Object],[object Object]
+2024-11-23T16:53:43.889Z info: [2024-11-23T16:53:43.887Z] GET /api/v1/admin
+2024-11-23T16:53:43.946Z info: Token verified for admin: admin1@gmail.com
+2024-11-23T16:53:44.175Z info: Users: [object Object],[object Object]

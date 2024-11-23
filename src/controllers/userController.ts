@@ -90,3 +90,64 @@ export const updateSubscription = async (req: Request, res: Response, next: Next
 };
 
 
+
+
+
+// export const updateSubscription = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+//   try {
+//     const userId = parseInt(req.params.id, 10);
+//     const { isSubscribed } = subscriptionSchema.parse(req.body);
+
+//     const user = await prisma.user.findUnique({
+//       where: { id: userId },
+//     });
+
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" });
+//     }
+
+//     // Validate the input
+//     if (typeof isSubscribed !== "boolean") {
+//       throw new AppError("Invalid value for 'isSubscribed'. Must be true or false.", 400);
+//     }
+
+//     // Step 2: Toggle subscription status
+//     const newStatus = !user.isSubscribed;
+
+//     // Update the subscription status
+//     const updatedUser = await prisma.user.update({
+//       where: { id: userId },
+//       data: { isSubscribed: newStatus },
+//     });
+
+//     // Send email to user about their updated subscription status
+//     const templateName = isSubscribed ? "subscribe" : "unsubscribe";
+//     const subject = isSubscribed ? "Welcome to Our Newsletter!" : "You've Unsubscribed from Our Newsletter";
+//     const link = `${process.env.BASE_URL}/user/${userId}/${newStatus ? "newsletter" : "unsubscribe"}`;
+//     console.log(`The LINK:  ${link}`);
+    
+
+//     await sendEmail({
+//       to: updatedUser.email,
+//       subject, 
+//       templateName, 
+//       templateData: {
+//         name: "Valued User",
+//         link
+//       }
+//     }); 
+
+//     res.status(200).json({
+//       message: `User has been ${isSubscribed ? "subscribed" : "unsubscribed"} successfully.`,
+//       data: updatedUser,
+//     });
+//   } catch (error: any) {
+//     if (error.code === "P2025") {
+//       // Handle case when user not found
+//       return next(new AppError("User not found.", 404));
+//     }
+//     next(error);
+//   }
+// };
+
+
